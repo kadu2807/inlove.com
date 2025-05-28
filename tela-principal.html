@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Carlos & Maria</title>
+</head>
+<body>
+    <header class="header">
+        <h2>Carlos Eduardo <span class="red">&</span> Maria Gabriela</h2>
+        <h2><span class="red">inlove</span>.com</h2>
+    </header>
+
+      <div class="music">
+        <div class="names">
+            <h3>Os anjos cantam</h3>
+            <h4>Jorge & Mateus</h4>
+        </div>
+        <button id="botaoMusica">
+            <i class="fas fa-play"></i>
+        </button>
+        <audio id="audioPlayer" src="audio/anjoscantam.mp3" loop></audio>
+      </div>
+
+      <section class="photo-text">
+        <div class="galeria-container">
+            <button class="btn" onclick="mudarFoto(-1)">&#8592;</button>
+          
+            <div class="galeria">
+              <img src="images/casal2.jpg" class="foto ativo">
+              <img src="images/casal4.jpg" class="foto">
+              <img src="images/casal3.jpg" class="foto">
+            </div>
+          
+            <button class="btn" onclick="mudarFoto(1)">&#8594;</button>
+        </div>
+        <div class="text">
+            <p>Oi, meu amor 💌 <br><br> 
+                Criei esse cantinho só pra você. Porque você merece todas as surpresas do mundo, todos os sorrisos, todos os momentos cheios de amor. Quis te lembrar, de um jeitinho especial, o quanto você é incrível e o quanto eu sou grato por ter você na minha vida. Te amo mais do que palavras conseguem dizer — mas mesmo assim, nunca vou parar de tentar. 💖</p>
+        </div>     
+      </section>
+
+      <h1 style="font-size: 45px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;">Momentos <span class="red">especiais</span>...</h1>
+
+      <section class="moments">
+            <div class="date-n">
+                <h2>Primeiro beijo</h2>
+                <h4>05/02/2022</h4>
+                <p>Nosso primeiro beijo foi em uma festa de aniversário… no meio da bagunça, das risadas e da música alta. Mas, naquele momento, tudo silenciou. Só existia você, eu… e o começo da nossa história. 💘</p>
+            </div>
+            <div class="date-n">
+                <h2>O pedido de namoro</h2>
+                <h4>30/10/2022</h4>
+                <p>No meio da festa de Halloween, você de fantasia, eu com o coração na mão… Jorge & Mateus começou a tocar, você sorriu daquele jeito e pronto. <br> Namorados!</p>
+            </div>
+            <div class="date-n">
+                <h2>Nossa virada de ano</h2>
+                <h4>01/01/2025</h4>
+                <p>Não tinha como ser mais especial. Começar o ano com você do meu lado, rindo, abraçando e sonhando junto… Mais um de muitos anos que ainda vamos viver juntos!</p>
+            </div>
+        </section>
+
+        <h1 style="font-size: 45px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;">Vivendo <span class="red">juntos</span> há...</h1>
+
+        <section class="start">
+            <div class="relacionamento">
+                <div class="tempo-container">
+                  <div class="tempo" id="anos">0<br><span>ano(s)</span></div>
+                  <div class="tempo" id="meses">0<br><span>mês(es)</span></div>
+                  
+                  <div class="tempo" id="dias">0<br><span>dia(s)</span></div>
+                  <div class="tempo" id="horas">0<br><span>hora(s)</span></div>
+                  
+                  <div class="tempo" id="minutos">0<br><span>minuto(s)</span></div>
+                  <div class="tempo" id="segundos">0<br><span>segundo(s)</span></div>
+                </div>
+              </div>
+        </section>
+    
+      <script>
+        const audio = document.getElementById("audioPlayer");
+        const botao = document.getElementById("botaoMusica");
+        const icone = botao.querySelector("i");
+    
+        botao.addEventListener("click", () => {
+          if (audio.paused) {
+            audio.play();
+            icone.classList.remove("fa-play");
+            icone.classList.add("fa-pause");
+          } else {
+            audio.pause();
+            icone.classList.remove("fa-pause");
+            icone.classList.add("fa-play");
+          }
+        });
+
+        let atual = 0;
+        const fotos = document.querySelectorAll('.foto');
+
+        function mudarFoto(direcao) {
+        fotos[atual].classList.remove('ativo');
+        atual = (atual + direcao + fotos.length) % fotos.length;
+        fotos[atual].classList.add('ativo');
+        }
+
+        function atualizarContador() {
+        const inicio = new Date("2022-10-30T00:00:00"); // 🗓️ Data de início
+        const agora = new Date();
+        let diff = agora - inicio;
+
+        const segundosTotais = Math.floor(diff / 1000);
+        const segundos = segundosTotais % 60;
+
+        const minutosTotais = Math.floor(segundosTotais / 60);
+        const minutos = minutosTotais % 60;
+
+        const horasTotais = Math.floor(minutosTotais / 60);
+        const horas = horasTotais % 24;
+
+        const diasTotais = Math.floor(horasTotais / 24);
+
+        const anos = Math.floor(diasTotais / 365);
+        const meses = Math.floor((diasTotais % 365) / 30);
+        const dias = diasTotais % 30;
+
+        // Atualiza os elementos HTML
+        document.getElementById('anos').innerHTML = `${anos}<br><span>ano(s)</span>`;
+        document.getElementById('meses').innerHTML = `${meses}<br><span>mês(es)</span>`;
+        document.getElementById('dias').innerHTML = `${dias}<br><span>dia(s)</span>`;
+        document.getElementById('horas').innerHTML = `${horas}<br><span>hora(s)</span>`;
+        document.getElementById('minutos').innerHTML = `${minutos}<br><span>minuto(s)</span>`;
+        document.getElementById('segundos').innerHTML = `${segundos}<br><span>segundo(s)</span>`;
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+    </script>
+    <hr width="80%" text-align="center" style="margin: 20px auto;">
+    <footer class="footer">
+        <h1><span class="red">inlove</span>.com</h1>
+        <p>Surpreenda seu parceiro(a) com um espaço único, feito só para vocês, cheio de memórias, carinho e momentos especiais.</p>
+        <div class="social-media">
+          <a href="">Instagram</a>
+          <a href="">Tiktok</a>
+          <a href="">WhatsApp</a>
+        </div>
+        <hr width="40%" text-align="center" style="margin: 30px auto;">
+        <p>Copyright © 2025 - inlove.com</p>
+    </footer>
+</body>
+</html>
